@@ -34,17 +34,16 @@ class FlavorForm extends React.Component {
             <option value="mango">Mango</option>
           </select>
         </label>
-        <form> 
+        
       <input class="input-text" placeholder="Nombre" type="text"/>
       <input class="input-text" placeholder="Apellido"/>
       <input class="input-text" placeholder="Apellido 2"/>
-      <input type="date">
+      <input type="date"/>
       <input placeholder="Que tanto te afecto el desastre?"/>
-      <input type="file" placeholder="Tu cv"> 
+      <input type="file" placeholder="Tu cv"/> 
       o 
       <textarea placeholder="describe tus capacidades"></textarea>
       
-    </form>
         <input type="submit" value="Submit" />
       </form>
     );
