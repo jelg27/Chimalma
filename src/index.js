@@ -26,11 +26,11 @@ class FlavorForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Pick your favorite flavor:
+          Pickea algo:
           <select value={this.state.value} onChange={this.handleChange}>
-            <option value="uva">Grapefruit</option>
-            <option value="ola">Lime</option>
-            <option value="diavlo">Coconut</option>
+            <option value="uva">uva</option>
+            <option value="ola">ola</option>
+            <option value="diavlo">diavlo</option>
             <option value="mango">Mango</option>
           </select>
         </label>
