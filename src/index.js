@@ -4,45 +4,44 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-function formatDate(date) {
-  return date.toLocaleDateString();
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'coco'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('Webos: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Pick your favorite flavor:
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="uva">Grapefruit</option>
+            <option value="ola">Lime</option>
+            <option value="diavlo">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
 }
 
-function Comment(props) {
-  return (
-    <div className="Comment">
-      <div className="UserInfo">
-        <img
-          className="Avatar"
-          src={props.author.avatarUrl}
-          alt={props.author.name}
-        />
-        <div className="UserInfo-name">
-          {props.author.name}
-        </div>
-      </div>
-      <div className="Comment-text">{props.text}</div>
-      <div className="Comment-date">
-        {formatDate(props.date)}
-      </div>
-    </div>
-  );
-}
-
-const comment = {
-  date: new Date(),
-  text: 'holis',
-  author: {
-    name: 'ola diavlo',
-    avatarUrl: 'https://placekitten.com/g/64/64',
-  },
-};
 ReactDOM.render(
-  <Comment
-    date={comment.date}
-    text={comment.text}
-    author={comment.author}
-  />,
+  <FlavorForm />,
   document.getElementById('root')
 );
 
