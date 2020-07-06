@@ -29,22 +29,22 @@ const SignupForm = () => {
     >
       <Form>
         <label htmlFor="firstName">Nombre:</label><br/>
-        <Field name="firstName" type="text" />
+        <Field name="firstName" type="text" /><br/>
         <ErrorMessage name="firstName" /><br/>
         <label htmlFor="lastName">Apellido:</label><br/>
-        <Field name="lastName" type="text" />
+        <Field name="lastName" type="text" /><br/>
         <ErrorMessage name="lastName" /><br/>
         <label htmlFor="email">Correo:</label><br/>
-        <Field name="email" type="email" />
+        <Field name="email" type="email" /><br/>
         <ErrorMessage name="email" /><br/>
        	<label htmlFor="date">Fecha:</label><br/>
-       	<Field name="date" type="date" />
+       	<Field name="date" type="date" /><br/>
        	<ErrorMessage name="date" /><br/>
        	<label htmlFor="afect">¿Qué tanto te afectó el desastre?:</label><br/>
-       	<Field name="afect" type="text" />
+       	<Field name="afect" type="text" /><br/>
        	<ErrorMessage name="afect" /><br/>
        	<label htmlFor="cap">¿Cuáles son tus capacidades?:</label><br/>
-       	<Field name="cap" type="text" />
+       	<Field name="cap" type="text" /><br/>
        	<ErrorMessage name="cap" /><br/>
        	<button type="submit">Subir</button>
       </Form>

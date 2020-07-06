@@ -1,3 +1,17 @@
 body{
 	background-color: lightblue;
 }
+.titulo{
+	
+}
+
+.form{
+
+}
+
+input[type=text]{
+	width: 40%;
+	height: 10%;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
