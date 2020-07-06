@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
 	cuadros: {
 		padding: '0px 0px 30px 0px',
+		width: '40%',
 	}
 });
 
