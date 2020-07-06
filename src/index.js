@@ -14,7 +14,16 @@ const useStyles = makeStyles({
 	cuadros: {
 		padding: '0px 0px 30px 0px',
 		width: '40%',
+	},
+	boton: {
+		background: 'linear-gradient(35deg, #0944FC 30%, #13A8EE 90%)',
+		boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+		color: 'white',
+		height: 48,
+		width: '20%',
+		padding: '0, 30px',
 	}
+
 });
 
 
@@ -45,7 +54,7 @@ const SignupForm = () => {
        	{formik.touched.date && formik.errors.date ? (<TextField type="date" name="date" error label={formik.errors.date} InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField type="date" name="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />)}<br/>
        	{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" label={formik.errors.afect} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} onChange={formik.handleChange} />)}<br/>
        	{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} />)}<br/>
-       	<Button type="submit" variant="contained" color="primary" >Subir</Button>
+       	<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       	</Form>
     	)}
       
