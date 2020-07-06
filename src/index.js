@@ -13,9 +13,9 @@ const SignupForm = () => {
     <Formik
       initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
       validationSchema={Yup.object({
-        firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Nombre requerido'),
-        lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Apellidos Requeridos'),
-        email: Yup.string().email('Correo inválido').required('Correo Requerido'),
+        firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido'),
+        lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido'),
+        email: Yup.string().email('Correo inválido').required('Este campo es requerido'),
         date: Yup.date().min("1920-01-01", "Favor de ingresar una fecha más reciente").max("2002-01-01", "Necesitas ser mayor de edad").required('Este campo es requerido'),
         afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido'),
         cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido')
