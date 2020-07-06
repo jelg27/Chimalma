@@ -39,12 +39,12 @@ const SignupForm = () => {
       }}
     >{formik=>(
     	<Form onSubmit={formik.handleSubmit}>
-        {formik.touched.firstName && formik.errors.firstName ? (<TextField name="firstName" label={formik.errors.firstName} variant="filled" error/>) : (<TextField name="firstName" label="Nombre" variant="filled" className={classes.cuadros} />)}<br/>
-        {formik.touched.firstName && formik.errors.lastName ? (<TextField name="lastName" label={formik.errors.lastName} variant="filled" error/>) : (<TextField name="lastName" label="Apellidos" variant="filled" className={classes.cuadros} />)}<br/>
-        {formik.touched.email && formik.errors.email ? (<TextField name="email" label={formik.errors.email} variant="filled" error />) : (<TextField name="email" label="Correo electronico" variant="filled" className={classes.cuadros} />)}<br/>
-       	{formik.touched.date && formik.errors.date ? (<TextField type="date" error label={formik.errors.date} InputLabelProps={{shrink: true,}}/>) : (<TextField type="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} />)}<br/>
-       	{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" label={formik.errors.afect} variant="filled" error/>) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} />)}<br/>
-       	{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" error/>) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} />)}<br/>
+        {formik.touched.firstName && formik.errors.firstName ? (<TextField name="firstName" label={formik.errors.firstName} variant="filled" error className={classes.cuadros} />) : (<TextField name="firstName" label="Nombre" variant="filled" className={classes.cuadros} />)}<br/>
+        {formik.touched.firstName && formik.errors.lastName ? (<TextField name="lastName" label={formik.errors.lastName} variant="filled" error className={classes.cuadros} />) : (<TextField name="lastName" label="Apellidos" variant="filled" className={classes.cuadros} />)}<br/>
+        {formik.touched.email && formik.errors.email ? (<TextField name="email" label={formik.errors.email} variant="filled" error className={classes.cuadros} />) : (<TextField name="email" label="Correo electronico" variant="filled" className={classes.cuadros} />)}<br/>
+       	{formik.touched.date && formik.errors.date ? (<TextField type="date" error label={formik.errors.date} InputLabelProps={{shrink: true,}} className={classes.cuadros} />) : (<TextField type="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} />)}<br/>
+       	{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" label={formik.errors.afect} variant="filled" error className={classes.cuadros} />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} />)}<br/>
+       	{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" error className={classes.cuadros} />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} />)}<br/>
        	<Button type="submit" variant="contained" color="primary" >Subir</Button>
       	</Form>
     	)}
