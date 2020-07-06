@@ -2,16 +2,44 @@ body{
 	background-color: lightblue;
 }
 .titulo{
-	
+	margin: auto;
 }
 
 .form{
-
+	margin: auto;
 }
 
-input[type=text]{
+.ing{
 	width: 40%;
-	height: 10%;
+	height: 30px;
+	margin: none;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+
+input[type=date]{
+	width: 20%;
+	height: 30px;
+	text-align: center;
+	border-radius: 8px;
+}
+
+label{
+	margin: none;
+}
+
+textarea{
+	width: 40%;
+	height: 150px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	resize:none;
+}
+
+.error{
+	background-color: Tomato;
+	width: 40%;
+	margin: none;
 	box-sizing: border-box;
 	border-radius: 8px;
 }

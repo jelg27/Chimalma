@@ -29,23 +29,23 @@ const SignupForm = () => {
     >
       <Form>
         <label htmlFor="firstName">Nombre:</label><br/>
-        <Field name="firstName" type="text" /><br/>
-        <ErrorMessage name="firstName" /><br/>
+        <Field name="firstName" type="text" class="ing" />
+        <p class="error"><ErrorMessage name="firstName" /></p>
         <label htmlFor="lastName">Apellido:</label><br/>
-        <Field name="lastName" type="text" /><br/>
-        <ErrorMessage name="lastName" /><br/>
-        <label htmlFor="email">Correo:</label><br/>
-        <Field name="email" type="email" /><br/>
-        <ErrorMessage name="email" /><br/>
+        <Field name="lastName" type="text" class="ing" />
+        <p class="error"><ErrorMessage name="lastName" class="error" /></p>
+        <label htmlFor="email" >Correo:</label><br/>
+        <Field name="email" type="email" class="ing" />
+        <p class="error"><ErrorMessage name="email" class="error" /></p>
        	<label htmlFor="date">Fecha:</label><br/>
-       	<Field name="date" type="date" /><br/>
-       	<ErrorMessage name="date" /><br/>
+       	<Field name="date" type="date" />
+       	<p class="error"><ErrorMessage name="date" class="error" /></p>
        	<label htmlFor="afect">¿Qué tanto te afectó el desastre?:</label><br/>
-       	<Field name="afect" type="text" /><br/>
-       	<ErrorMessage name="afect" /><br/>
+       	<Field name="afect" as="textarea" />
+       	<p class="error"><ErrorMessage name="afect" class="error" /></p>
        	<label htmlFor="cap">¿Cuáles son tus capacidades?:</label><br/>
-       	<Field name="cap" type="text" /><br/>
-       	<ErrorMessage name="cap" /><br/>
+       	<Field name="cap" as="textarea" />
+       	<p class="error"><ErrorMessage name="cap" class="error" /></p>
        	<button type="submit">Subir</button>
       </Form>
     </Formik>
