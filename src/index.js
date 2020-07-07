@@ -88,7 +88,8 @@ export default function Tablas() {
       <AppBar position="static" className={classes.top}>
         <Tabs value={value} onChange={handleChange} >
         	<Tab label="Inicio" {...a11yProps(0)} />
-        	<Tab label="Registro" {...a11yProps(1)} />
+        	<Tab label="Registro empleado" {...a11yProps(1)} />
+        	<Tab label="Registro empresas" {...a11yProps(1)} />
           
 
         </Tabs>
@@ -130,6 +131,33 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
        			{formik.touched.date && formik.errors.date ? (<TextField type="date" name="date" error label={formik.errors.date} InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField type="date" name="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
        			{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" label={formik.errors.afect} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}}  rows={5} multiline/>)}<br/>
        			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
+       			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
+      		</Form>
+    	)}
+      
+    </Formik>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+      <Formik
+      		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
+      		validationSchema={Yup.object({
+        	nomEmp: Yup.string().max(40, 'Nombre de la empresa debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	trab: Yup.string().max(20, 'El puesto deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
+      		})}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    	>{formik=>(
+    		<Form onSubmit={formik.handleSubmit}>
+        		{formik.touched.nomEmp && formik.errors.nomEmp ? (<TextField name="nomEmp" label={formik.errors.firstName} InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="nomEmp" id="firstName" label="Nombre de la empresa" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+        		{formik.touched.trab && formik.errors.trab ? (<TextField name="trab" label={formik.errors.lastName} InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="trab" label="Trabajo ofertado" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+        		{formik.touched.email && formik.errors.email ? (<TextField name="email" label={formik.errors.email} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="email" label="email" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+       			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Qué capacidades requiere el puesto ofertado?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       		</Form>
     	)}
