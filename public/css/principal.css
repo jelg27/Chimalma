@@ -2,7 +2,7 @@ body{
 	background-color: lightblue;
 }
 .titulo{
-	margin: auto;
+	width: 100%
 }
 
 .form{
