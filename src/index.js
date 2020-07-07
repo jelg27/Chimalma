@@ -109,12 +109,12 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         <Formik
       		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
       		validationSchema={Yup.object({
-        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
-        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
         	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
         	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
-        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
+        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
       		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
