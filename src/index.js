@@ -152,22 +152,25 @@ serviceWorker.unregister();
 
 
 function addUser(userdata){
-  alert("[OwO]");
-  
-  
+ 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://jelg:#2kG8zanTt.dPZ!>@chimalma.btawf.mongodb.net/test?retryWrites=true&w=majority";
-alert("UwU");
+const uri = "mongodb+srv://jelg:7qqd7KMGNGs2sbK8@chimalma.btawf.mongodb.net/test?retryWrites=true&w=majority"";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-alert("UnU");
+/*
 client.connect(err => {
   alert(client);
-  err ? alert(err) : console.log('parece que salio bien');
+  err ? console.log(err) : alert('parece que salio bien');
 
   const collection = client.db("test").collection("devices");
   // perform actions on the collection object
   client.close();
-});
+});*/
+try {
+  client.connect();
+  alert('parece que salio bien');
+} catch (error) {
+  console.log(error);
+}
 
   alert('fin');
 }
