@@ -116,12 +116,11 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
         	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
       		})}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
+          onSubmit={values => {
+            alert('OwO');
+            addUser(values);
+            alert(JSON.stringify(values, null, 2));
+          }}
     	>{formik=>(
     		<Form onSubmit={formik.handleSubmit}>
         		{formik.touched.firstName && formik.errors.firstName ? (<TextField name="firstName" label={formik.errors.firstName} InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="firstName" id="firstName" label="Nombre" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
@@ -149,3 +148,39 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+
+
+function addUser(seedData){
+  alert(seedData);
+
+  const MongoClient = require('mongodb').MongoClient;
+  
+  
+  alert('1');
+  // Connection URL
+  const url = "mongodb://heroku_4mx8tqvg:onlc0i9e3iecjg2n8e52qhs2v2@ds149875.mlab.com:49875/heroku_4mx8tqvg";
+  
+  alert('2');
+  // Database Name
+  const dbName = 'heroku_4mx8tqvg';
+  
+  alert('3');
+  // Create a new MongoClient
+  const client = new MongoClient(url);
+  
+  alert('4');
+  // Use connect method to connect to the Server
+  try {
+     client.connect();
+  } catch (error) {
+    console.log(error);
+  }
+
+  const db = client.db(dbName);
+  let users = db.collection('users');
+  users.insertOne( { item: "OwO", qty: 0 } );
+  client.close();
+  alert('fin');
+}
