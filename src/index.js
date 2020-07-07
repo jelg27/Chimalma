@@ -152,14 +152,18 @@ serviceWorker.unregister();
 
 
 function addUser(userdata){
-  alert(userdata);
+  alert("[OwO]");
   
   
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://jelg:<password>@chimalma.btawf.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const uri = "mongodb+srv://jelg:#2kG8zanTt.dPZ!>@chimalma.btawf.mongodb.net/test?retryWrites=true&w=majority";
+alert("UwU");
 const client = new MongoClient(uri, { useNewUrlParser: true });
+alert("UnU");
 client.connect(err => {
-  if(err) alert(err);
+  alert(client);
+  err ? alert(err) : console.log('parece que salio bien');
+
   const collection = client.db("test").collection("devices");
   // perform actions on the collection object
   client.close();
