@@ -109,12 +109,12 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         <Formik
       		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
       		validationSchema={Yup.object({
-        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido'),
-        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido'),
-        	email: Yup.string().email('Correo inválido').required('Este campo es requerido'),
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
+        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
+        	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
         	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
-        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido')
+        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z ]/, 'No ingreses caracteres especiales'),
       		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -128,8 +128,8 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         		{formik.touched.lastName && formik.errors.lastName ? (<TextField name="lastName" label={formik.errors.lastName} InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="lastName" label="Apellidos" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
         		{formik.touched.email && formik.errors.email ? (<TextField name="email" label={formik.errors.email} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="email" label="email" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
        			{formik.touched.date && formik.errors.date ? (<TextField type="date" name="date" error label={formik.errors.date} InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField type="date" name="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
-       			{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" label={formik.errors.afect} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}}  rows={5} multiline/>)}<br/>
-       			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
+       			{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" label={formik.errors.afect} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}}  rows={5} multiline/>)}<br/>
+       			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" label={formik.errors.cap} variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       		</Form>
     	)}
