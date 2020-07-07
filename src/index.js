@@ -87,20 +87,35 @@ export default function Tablas() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.top}>
         <Tabs value={value} onChange={handleChange} >
-          <Tab label="Item One" {...a11yProps(0)} />
+        	<Tab label="Inicio" {...a11yProps(0)} />
+        	<Tab label="Registro" {...a11yProps(1)} />
+          
+
         </Tabs>
       </AppBar>
+      
       <TabPanel value={value} index={0}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in tristique quam, ac cursus ipsum. Mauris elementum viverra nisi imperdiet consectetur. Aenean feugiat dolor lectus. Nunc at augue non ante condimentum ultrices nec vitae purus. Fusce pretium enim a gravida porttitor. Suspendisse scelerisque, nisl nec finibus viverra, massa ipsum mattis velit, nec elementum quam odio at ante. Ut semper auctor mi ut fermentum. Morbi pharetra dui vel felis tincidunt euismod. Mauris vitae mollis mauris. Nunc aliquet nibh eu ipsum bibendum, vel fringilla est rutrum. Morbi aliquam tristique dapibus. Aenean porttitor est sed mollis viverra. Curabitur sagittis bibendum justo, ac mollis tortor malesuada eu. Aliquam iaculis, massa eu pretium fermentum, metus sem feugiat ligula, sed molestie nunc sem in nunc. Cras ligula est, rutrum id sagittis nec, consectetur non odio.
+
+Aenean libero risus, vulputate eu accumsan nec, gravida eget lectus. Sed elementum dui non accumsan rhoncus. Ut quis justo mauris. In hac habitasse platea dictumst. Curabitur mollis lacus quis magna auctor, eu vulputate odio fringilla. Integer imperdiet luctus lobortis. Aliquam ac feugiat diam. Aliquam dictum lobortis dignissim. Donec vel felis ullamcorper, pellentesque arcu nec, commodo urna.
+
+Sed facilisis augue vitae odio vestibulum viverra. Nullam vitae ultricies lectus. Integer eleifend neque vel ante bibendum pellentesque. Mauris maximus eu nunc vitae mollis. In interdum enim ut massa interdum, ac rutrum mauris gravida. Donec tempus metus ac pretium auctor. Etiam rutrum enim risus, quis euismod est tincidunt eu. In eu bibendum eros. Etiam at tristique ante. Ut volutpat in leo at varius.
+
+Nullam egestas vitae purus sed sollicitudin. Cras non rhoncus libero. Integer posuere dolor elit, vel dignissim nunc dapibus at. Etiam venenatis tincidunt sem. Etiam nec condimentum est. Aenean mauris augue, convallis sit amet dignissim sed, sodales tincidunt tortor. Aliquam sit amet ipsum id purus bibendum condimentum eu vitae metus. Proin pretium dignissim ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc imperdiet eget massa nec dapibus. Maecenas vel neque luctus, commodo nisi vitae, commodo dui. Nam urna nulla, dictum ac purus ac, dapibus commodo diam. Praesent vestibulum molestie nunc, vel lobortis tellus facilisis eget. Aliquam dictum velit mi, et sollicitudin eros gravida nec. Sed ex purus, vehicula vulputate sapien efficitur, posuere porta mi.
+
+Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendisse quis luctus nulla. Fusce vel erat pellentesque, tincidunt velit id, efficitur elit. Nam lobortis fringilla mi non venenatis. Suspendisse nulla felis, commodo in auctor quis, venenatis nec libero. Donec rutrum accumsan tortor vitae ultrices. Pellentesque elementum faucibus varius. Quisque id nulla tortor. Nulla ultrices lobortis dui. Morbi at dui vel ligula molestie aliquam. Curabitur malesuada, arcu iaculis egestas sagittis, nisi lacus gravida lectus, sit amet luctus risus nibh a sem. Vivamus ut sodales ligula.
+      </TabPanel>
+      <TabPanel value={value} index={1}>
         <Formik
-      initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
-      validationSchema={Yup.object({
-        firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido'),
-        lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido'),
-        email: Yup.string().email('Correo inválido').required('Este campo es requerido'),
-        date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
-        afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido'),
-        cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido')
-      	})}
+      		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
+      		validationSchema={Yup.object({
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido'),
+        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido'),
+        	email: Yup.string().email('Correo inválido').required('Este campo es requerido'),
+        	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
+        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido')
+      		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
