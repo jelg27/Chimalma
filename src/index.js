@@ -158,7 +158,7 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         		{formik.touched.trab && formik.errors.trab ? (<TextField name="trab" helperText={formik.errors.trab} label="Trabajo ofertado" InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="trab" label="Trabajo ofertado" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
         		{formik.touched.email && formik.errors.email ? (<TextField name="email" helperText={formik.errors.email} label="email" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="email" label="email" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
        			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" helperText={formik.errors.cap} label="¿Qué capacidades requiere el puesto ofertado?" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Qué capacidades requiere el puesto ofertado?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
-       			<TextField variant="filled" type="number"/>	
+       			<TextField variant="filled" type="number" className={classes.cuadros}/><br/>
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       		</Form>
     	)}
