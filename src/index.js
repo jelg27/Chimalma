@@ -154,7 +154,7 @@ serviceWorker.unregister();
 function addUser(userdata){
  
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://jelg:7qqd7KMGNGs2sbK8@chimalma.btawf.mongodb.net/test?retryWrites=true&w=majority"";
+const uri = "mongodb+srv://jelg:7qqd7KMGNGs2sbK8@chimalma.btawf.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 /*
 client.connect(err => {
