@@ -10,11 +10,16 @@ const client = new MongoClient(uri);
 const db = mongoose.connection;
 const dbName = "Usu";
 
+
+mongoose.connection.on('connected', function(){
+	mongoose.connection.db = mongoose.connection.client.db('Usus');
+})
 mongoose.connect(uri, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
 	
 }).catch(err => console.log(err));
+
 
 db.once('open', _ =>{
 	console.log('base conectada');
