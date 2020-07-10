@@ -1,10 +1,11 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { useFormik } from 'formik';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -15,7 +16,24 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import PropTypes from 'prop-types';
+import io from 'socket.io-client';
 
+const socket = io();
+
+class Usu extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.state = {
+      nom: '',
+    app: '',
+    email: '',
+    date: '',
+    afec: '',
+    cap: '',
+    }
+  }
+}
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -121,6 +139,7 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
+          socket.emit('reg:Usu', values);
         }, 400);
       }}
     	>{formik=>(
@@ -162,7 +181,6 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       		</Form>
     	)}
-      
     </Formik>
       </TabPanel>
     </div>
