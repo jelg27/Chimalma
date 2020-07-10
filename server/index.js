@@ -13,7 +13,7 @@ const dbName = "Usu";
 mongoose.connect(uri, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
-	dbName: "usuReg",
+	
 }).catch(err => console.log(err));
 
 db.once('open', _ =>{
