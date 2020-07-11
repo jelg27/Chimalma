@@ -15,11 +15,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
+import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
 const socket = io();
 
+//Detectar si está en celular
 function isMobile(){
     return (
         (navigator.userAgent.match(/Android/i)) ||
@@ -41,20 +43,7 @@ if(isMobile()){
   but = '20%';
 }
 
-class Usu extends React.Component{
-  constructor(props){
-    super(props);
-
-    this.state = {
-      nom: '',
-    app: '',
-    email: '',
-    date: '',
-    afec: '',
-    cap: '',
-    }
-  }
-}
+//Propiedades del sistemita de tablas
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -75,13 +64,13 @@ function TabPanel(props) {
   );
 }
 
-
+//Tipos de propiedades
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
-
+//propiedades que te dan el index donde va
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -89,7 +78,7 @@ function a11yProps(index) {
   };
 }
 
-
+//Estilos de los inputs y todo, es como un css
 const useStyles = makeStyles((theme) =>({
 	cuadros: {
 		padding: '0px 0px 30px 0px',
@@ -113,7 +102,7 @@ const useStyles = makeStyles((theme) =>({
 }));
 
 
-
+//Aqui se crean las tabs y todo en general
 export default function Tablas() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -129,7 +118,7 @@ export default function Tablas() {
         	<Tab label="Inicio" {...a11yProps(0)} />
         	<Tab label="Registro empleado" {...a11yProps(1)} />
         	<Tab label="Registro empresas" {...a11yProps(1)} />
-          
+          <Tab label="Registro por chat" {...a11yProps(1)} />
 
         </Tabs>
       </AppBar>
@@ -149,12 +138,12 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         <Formik
       		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
       		validationSchema={Yup.object({
-        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
-        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
+        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
         	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
         	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
-        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
+        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
       		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -181,10 +170,10 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
       <Formik
       		initialValues={{ nomEmp: '', trab: '', email: '', cap: ''}}
       		validationSchema={Yup.object({
-        	nomEmp: Yup.string().max(40, 'Nombre de la empresa debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
-        	trab: Yup.string().max(20, 'El puesto deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
-        	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
+        	nomEmp: Yup.string().max(40, 'Nombre de la empresa debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
+        	trab: Yup.string().max(20, 'El puesto deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
+        	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-ñ]+(.[_a-z0-9-ñ]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
       		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -203,6 +192,14 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
       		</Form>
     	)}
     </Formik>
+      </TabPanel>
+      <TabPanel value={value} index={3} >
+        <Box maxWidth="sm" height={500}>
+
+        </Box>
+        <div >
+          <TextField type="text"  maxWidth="sm" />
+        </div>
       </TabPanel>
     </div>
   );
