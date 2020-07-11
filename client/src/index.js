@@ -20,6 +20,25 @@ import io from 'socket.io-client';
 
 const socket = io();
 
+function isMobile(){
+    return (
+        (navigator.userAgent.match(/Android/i)) ||
+        (navigator.userAgent.match(/webOS/i)) ||
+        (navigator.userAgent.match(/iPhone/i)) ||
+        (navigator.userAgent.match(/iPod/i)) ||
+        (navigator.userAgent.match(/iPad/i)) ||
+        (navigator.userAgent.match(/BlackBerry/i))
+    );
+}
+
+var width;
+
+if(isMobile()){
+  width = '80%';
+}else{
+  width = '40%';
+}
+
 class Usu extends React.Component{
   constructor(props){
     super(props);
@@ -72,7 +91,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) =>({
 	cuadros: {
 		padding: '0px 0px 30px 0px',
-		width: '40%',
+		width: width,
 	},
 	boton: {
 		background: 'linear-gradient(35deg, #3389EA 30%, #13A8EE 90%)',
