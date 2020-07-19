@@ -1,11 +1,10 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { useFormik } from 'formik';
-import { Formik, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -15,35 +14,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
-import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
-import io from 'socket.io-client';
 
-const socket = io();
-
-//Detectar si está en celular
-function isMobile(){
-    return (
-        (navigator.userAgent.match(/Android/i)) ||
-        (navigator.userAgent.match(/webOS/i)) ||
-        (navigator.userAgent.match(/iPhone/i)) ||
-        (navigator.userAgent.match(/iPod/i)) ||
-        (navigator.userAgent.match(/iPad/i)) ||
-        (navigator.userAgent.match(/BlackBerry/i))
-    );
-}
-
-var width, but;
-
-if(isMobile()){
-  width = '80%';
-  but = '60%';
-}else{
-  width = '40%';
-  but = '20%';
-}
-
-//Propiedades del sistemita de tablas
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -64,13 +36,13 @@ function TabPanel(props) {
   );
 }
 
-//Tipos de propiedades
+
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
-//propiedades que te dan el index donde va
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -78,24 +50,18 @@ function a11yProps(index) {
   };
 }
 
-function mensaje (msg){
-  return(
-    <div>msg</div>
-    );
-}
 
-//Estilos de los inputs y todo, es como un css
 const useStyles = makeStyles((theme) =>({
 	cuadros: {
 		padding: '0px 0px 30px 0px',
-		width: width,
+		width: '40%',
 	},
 	boton: {
 		background: 'linear-gradient(35deg, #3389EA 30%, #13A8EE 90%)',
 		boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 		color: 'white',
 		height: 48,
-		width: but,
+		width: '20%',
 		padding: '0, 30px',
 	},
 	root: {
@@ -108,7 +74,7 @@ const useStyles = makeStyles((theme) =>({
 }));
 
 
-//Aqui se crean las tabs y todo en general
+
 export default function Tablas() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -124,8 +90,8 @@ export default function Tablas() {
         	<Tab label="Inicio" {...a11yProps(0)} />
         	<Tab label="Registro empleado" {...a11yProps(1)} />
         	<Tab label="Registro empresas" {...a11yProps(1)} />
-          <Tab label="Registro por chat" {...a11yProps(1)} />
-          <Tab label="Iniciar sesión" {...a11yProps(1)} />
+          
+
         </Tabs>
       </AppBar>
       
@@ -144,18 +110,17 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         <Formik
       		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
       		validationSchema={Yup.object({
-        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
-        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
         	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
         	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
-        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
+        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
       		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
-          socket.emit('reg:Usu', values);
         }, 400);
       }}
     	>{formik=>(
@@ -176,10 +141,10 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
       <Formik
       		initialValues={{ nomEmp: '', trab: '', email: '', cap: ''}}
       		validationSchema={Yup.object({
-        	nomEmp: Yup.string().max(40, 'Nombre de la empresa debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
-        	trab: Yup.string().max(20, 'El puesto deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
-        	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-ñ]+(.[_a-z0-9-ñ]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
+        	nomEmp: Yup.string().max(40, 'Nombre de la empresa debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	trab: Yup.string().max(20, 'El puesto deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ]+$/, 'No ingreses caracteres especiales'),
+        	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ]+$/, 'No ingreses caracteres especiales'),
       		})}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -197,42 +162,12 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       		</Form>
     	)}
+      
     </Formik>
-      </TabPanel>
-      <TabPanel value={value} index={3} >
-        <Box maxWidth="sm" height={500}>
-
-        </Box>
-        <div >
-          <TextField type="text"  maxWidth="sm" />
-        </div>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <Formik
-          initialValues={{ nomEmp: '', trab: '', email: 'asd@asd.com', cap: ''}}
-          onSubmit={(values, { setSubmitting })=>{
-            socket.emit('log:Usus', values)
-            socket.on('message', data => {
-              alert(data);
-              mensaje(data);
-              socket.removeAllListeners();
-            })
-          }
-          }
-        >
-          {formik=>(
-            <Form onSubmit={formik.handleSubmit}>
-            <Button type="submit" variant="contained">Subir</Button>
-            </Form>
-            )
-          }
-        </Formik>
       </TabPanel>
     </div>
   );
 }
-
-
 
 ReactDOM.render(
   <Tablas />,

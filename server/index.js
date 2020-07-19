@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 const client = new MongoClient(uri);
 const db = mongoose.connection;
 const dbName = "Usu";
-
 //Cambia la base de datos a la de Usus, es lo que usaré para alternar entre la de usuarios y la de empresas
 mongoose.connection.on('connected', function(){
 	mongoose.connection.db = mongoose.connection.client.db('Usus');
@@ -52,6 +51,14 @@ io.on('connection', (socket) => {
 		usuario.save((err, document) => {
 			if(err) console.log(err);
 			console.log(document);
+		});
+	});
+
+	socket.on('log:Usus', (data) => {
+		console.log(data);
+		const wea = Us.findOne({email: 'asd@asd.com'}, (err, document) => {
+			console.log(document.email);
+			socket.send(document.email);
 		});
 	});
 
