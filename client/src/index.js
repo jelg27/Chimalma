@@ -142,15 +142,18 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Formik
-      		initialValues={{ firstName: '', lastName: '', email: '' , date: '', afect: '', cap: ''}}
+      		initialValues={{ firstName: '', lastName: '', email: '' , password: '', date: '', afect: '', cap: ''}}
       		validationSchema={Yup.object({
-        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ0-9]+$/, 'No ingreses caracteres especiales'),
         	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
         	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
-        	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
+        	password: Yup.string().required('Este campo es requerido').min(8, 'Se requiere que sea de minimo 8 caracteres'),
+          passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben ser iguales'),
+          date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
         	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
         	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
-      		})}
+      		
+          })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -162,8 +165,10 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
     		<Form onSubmit={formik.handleSubmit}>
         		{formik.touched.firstName && formik.errors.firstName ? (<TextField name="firstName" helperText={formik.errors.firstName} label="Nombre" InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="firstName" id="firstName" label="Nombre" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
         		{formik.touched.lastName && formik.errors.lastName ? (<TextField name="lastName" helperText={formik.errors.lastName} label="Apellidos" InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="lastName" label="Apellidos" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
-        		{formik.touched.email && formik.errors.email ? (<TextField name="email" helperText={formik.errors.email} label="email" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="email" label="email" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
-       			{formik.touched.date && formik.errors.date ? (<TextField type="date" name="date" error helperText={formik.errors.date} label="Fecha de Nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField type="date" name="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+            {formik.touched.email && formik.errors.email ? (<TextField name="email" helperText={formik.errors.email} label="email" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="email" label="email" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+       			{formik.touched.password && formik.errors.password ? (<TextField name="password" type="password" helperText={formik.errors.password} label="Contraseña" InputLabelProps={{shrik: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="password" type="password" label="Contraseña" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+            {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation ? (<TextField name="passwordConfirmation" type="password"  helperText={formik.errors.passwordConfirmation} label="Confirmar Contraseña" InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="passwordConfirmation" type="password" label="Confirmar Contraseña" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+            {formik.touched.date && formik.errors.date ? (<TextField type="date" name="date" error helperText={formik.errors.date} label="Fecha de Nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField type="date" name="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
        			{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" helperText={formik.errors.afect} label="¿Qué tanto le afectó el desastre?" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}}  rows={5} multiline/>)}<br/>
        			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" helperText={formik.errors.cap} label="¿Xuáles son sus capacidades?" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
@@ -209,19 +214,32 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Formik
-          initialValues={{ nomEmp: '', trab: '', email: 'asd@asd.com', cap: ''}}
+          validationSchema={Yup.object({
+            email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-ñ]+(.[_a-z0-9-ñ]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, "No puedes ingresar esos caracteres"),
+          })}
+          initialValues={{ email: '', password: 'a'}}
           onSubmit={(values, { setSubmitting })=>{
-            socket.emit('log:Usus', values)
+            socket.emit('log:Usus', values);
             socket.on('message', data => {
-              alert(data);
-              mensaje(data);
               socket.removeAllListeners();
+              if( data.password == values.password){
+                alert("Inicia sesion");
+                ReactDOM.render(
+                  <Sesion />,
+                  document.querySelector('#root')
+                  );
+              }else{
+                alert("Correo o contraseña inválidos");
+              }
+                
             })
           }
           }
         >
           {formik=>(
             <Form onSubmit={formik.handleSubmit}>
+            {formik.touched.email && formik.errors.email ? (<TextField name="email" helperText={formik.errors.email} label="Correo" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="email" variant="filled" label="Correo" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
+            <TextField name="password" label="Contraseña" variant="filled" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />
             <Button type="submit" variant="contained">Subir</Button>
             </Form>
             )
@@ -232,6 +250,11 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
   );
 }
 
+export function Sesion(){
+  return(
+    <div>webos</div>
+    )
+}
 
 
 ReactDOM.render(

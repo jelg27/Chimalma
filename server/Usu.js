@@ -4,6 +4,7 @@ const usSchema = new mongoose.Schema({
 	firstName: String,
 	lastName: String,
 	email: String,
+	password: String,
 	date: String,
 	afect: String,
 	cap: String,

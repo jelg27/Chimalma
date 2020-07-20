@@ -55,10 +55,11 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('log:Usus', (data) => {
-		console.log(data);
-		const wea = Us.findOne({email: 'asd@asd.com'}, (err, document) => {
+		console.log(data.email);
+		const wea = Us.findOne({email: data.email}, (err, document) => {
 			console.log(document.email);
-			socket.send(document.email);
+			const usuario = new Us(document);
+			socket.send(usuario);
 		});
 	});
 
