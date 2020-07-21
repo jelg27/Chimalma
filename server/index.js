@@ -55,7 +55,6 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('log:Usus', (data) => {
-		console.log(data.email);
 		const wea = Us.findOne({email: data.email}, (err, document) => {
 			console.log(document.email);
 			const usuario = new Us(document);
