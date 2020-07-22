@@ -9,7 +9,7 @@ import Sesion from './Sesion';
 
 
 ReactDOM.render(
-  <Sesion />,
+  <Tablas />,
   document.querySelector('#root')
 );
 

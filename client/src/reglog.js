@@ -134,14 +134,14 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
         <Formik
       		initialValues={{ firstName: '', lastName: '', email: '' , password: '', date: '', afect: '', cap: ''}}
       		validationSchema={Yup.object({
-        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ0-9]+$/, 'No ingreses caracteres especiales'),
-        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-Z ñ]+$/, 'No ingreses caracteres especiales'),
+        	firstName: Yup.string().max(40, 'Nombre debe ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$/, 'No ingreses caracteres especiales'),
+        	lastName: Yup.string().max(20, 'Apellidos deben ser de 40 caracteres o menos').required('Este campo es requerido').matches(/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$/, 'No ingreses caracteres especiales'),
         	email: Yup.string().email('Correo inválido').required('Este campo es requerido').matches(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/, 'No puedes ingresar esos caracteres'),
         	password: Yup.string().required('Este campo es requerido').min(8, 'Se requiere que sea de minimo 8 caracteres'),
-          passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben ser iguales'),
-          date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
-        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
-        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-Z0-9_ ñ]+$/, 'No ingreses caracteres especiales'),
+          	passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben ser iguales'),
+          	date: Yup.date().min('1920-01-01', 'Favor de ingresar una fecha más reciente').max('2002-01-01', 'Necesitas ser mayor de edad').required('Este campo es requerido'),
+        	afect: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$/, 'No ingreses caracteres especiales'),
+        	cap: Yup.string().max(500, 'El límite es de 500 caracteres').required('Este campo es requerido').matches(/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ,]+$/, 'No ingreses caracteres especiales'),
       		
           })}
       onSubmit={(values, { setSubmitting }) => {
@@ -160,7 +160,7 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
             	{formik.touched.passwordConfirmation && formik.errors.passwordConfirmation ? (<TextField name="passwordConfirmation" type="password"  helperText={formik.errors.passwordConfirmation} label="Confirmar Contraseña" InputLabelProps={{shrink: true,}} variant="filled" error className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField name="passwordConfirmation" type="password" label="Confirmar Contraseña" variant="filled" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
             	{formik.touched.date && formik.errors.date ? (<TextField type="date" name="date" error helperText={formik.errors.date} label="Fecha de Nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} />) : (<TextField type="date" name="date" label="Fecha de nacimiento" InputLabelProps={{shrink: true,}} className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} />)}<br/>
        			{formik.touched.afect && formik.errors.afect ? (<TextField name="afect" helperText={formik.errors.afect} label="¿Qué tanto le afectó el desastre?" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="afect"  variant="filled" label="¿Qué tanto le afectó el desastre?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}}  rows={5} multiline/>)}<br/>
-       			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" helperText={formik.errors.cap} label="¿Xuáles son sus capacidades?" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline/>)}<br/>
+       			{formik.touched.cap && formik.errors.cap ? (<TextField name="cap" helperText={formik.errors.cap} label="¿Cuáles son sus capacidades?" variant="filled" InputLabelProps={{shrink: true,}} error className={classes.cuadros} onChange={formik.handleChange} rows={5} multiline />) : (<TextField name="cap" variant="filled" label="¿Cuáles son sus capacidades?" className={classes.cuadros} onChange={formik.handleChange} InputLabelProps={{shrink: true,}} rows={5} multiline helperText="Ej. Reparación, construcción, instalación,...,etc. " />)}<br/>
        			<Button type="submit" variant="contained" className={classes.boton}>Subir</Button>
       		</Form>
     	)}
@@ -214,6 +214,11 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
               socket.removeAllListeners();
               if( data.password == values.password){
                 alert("Inicia sesion");
+                sessionStorage.setItem("firstName", data.firstName);
+                sessionStorage.setItem("lastName", data.lastName);
+                sessionStorage.setItem("email", data.email);
+                sessionStorage.setItem("cap", data.cap);
+                sessionStorage.setItem("date", data.date);
                 ReactDOM.render(
                   <Sesion />,
                   document.querySelector('#root')

@@ -4,26 +4,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import io from 'socket.io-client';
+import Sesion from './Sesion'
+const socket = io();
+
 
 navigator.geolocation.getCurrentPosition(position => {
-  alert(position.coords.latitude + " " + position.coords.longitude);
+  //alert(position.coords.latitude + " " + position.coords.longitude);
 });
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -32,8 +26,8 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -53,8 +47,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
@@ -62,47 +56,53 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    display: 'flex',
-    
+    height: 224,
+    width: '100%',
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
-
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+   heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '70%',
+    flexShrink: 0,
   },
-  expandOpen: {
-    transform: 'rotate(180deg)',
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    width: '1000'
   },
 }));
 
+var i = [<br/>];
 function trab(classes, [expanded, setExpanded]){
 
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  var i = [<div>caca</div>];
   
-  for(var j = 0; j < 10; j++){
-    i.push(
-    <Card className={classes.root}>
-      <CardHeader title="caca"/>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          sdvnsvnsdlvsdnlvndskl
-        </Typography>
-      </CardContent>
-    </Card>
+  socket.removeAllListeners();
+  
+  socket.emit('con:trab', {email: sessionStorage.getItem("email")});
+  socket.on('message', (data) => {
+  
+      alert(data.email);
+      i.push(
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls={"bh-content"} id={"bh-header"} >
+            <Typography className={classes.heading}>{data.email}</Typography>
+            <Typography className={classes.secondaryHeading}>{data.nomSol}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+                {data.des}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
     );  
-  }
-  return i; 
+   
+  
+  
+
+  });
+  
 
   
 }
@@ -118,44 +118,22 @@ export default function VerticalTabs() {
 
   return (
     <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabs}
-      >
-        <Tab label="Usuario" {...a11yProps(0)} />
-        <Tab label="Empleos cercanos" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
-      </Tabs>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Perfil" {...a11yProps(0)} />
+          <Tab label="Trabajos disponibles" {...a11yProps(1)} />
+          <Tab label="Item Three" {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
       <TabPanel value={value} index={0}>
-        Item One
-        <div ><img src="https://placekitten.com/1000/200" class="titulo" /></div>
+        aasdasdads
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div id="trabajos"></div>
         {trab(classes, [expanded, setExpanded])}
+        {i}
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
       </TabPanel>
     </div>
   );
