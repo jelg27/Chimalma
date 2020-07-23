@@ -213,7 +213,6 @@ Vivamus luctus nisl et tortor consectetur, eget aliquam sapien iaculis. Suspendi
             socket.on('message', data => {
               socket.removeAllListeners();
               if( data.password == values.password){
-                alert("Inicia sesion");
                 sessionStorage.setItem("firstName", data.firstName);
                 sessionStorage.setItem("lastName", data.lastName);
                 sessionStorage.setItem("email", data.email);

@@ -82,8 +82,7 @@ function trab(classes, [expanded, setExpanded]){
   
   socket.emit('con:trab', {email: sessionStorage.getItem("email")});
   socket.on('message', (data) => {
-  
-      alert(data.email);
+
       i.push(
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls={"bh-content"} id={"bh-header"} >
@@ -97,14 +96,9 @@ function trab(classes, [expanded, setExpanded]){
           </AccordionDetails>
         </Accordion>
     );  
-   
-  
-  
 
   });
-  
 
-  
 }
 
 

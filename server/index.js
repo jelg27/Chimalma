@@ -12,7 +12,7 @@ const dbName = "Usu";
 const Tr = require('./Trab');
 const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
-var trabajos = [];
+
 
 const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
   version: '2019-07-12',
@@ -137,28 +137,4 @@ io.on('connection', (socket) => {
 
 
 
-/*
-io.on('connection', (socket) => {
-
-	socket.on('Usuario', (Usu) => {
-
-	const usuario = new Usu({
-		nom: Usu.nom,
-		app: Usu.app,
-		email: Usu.email,
-		date: Usu.date,
-		afec: Usu.adec,
-		cap: Usu.cap,
-	});
-
-	usu.save((err) => {
-		if (err) return console.error(err);
-	});
-
-	console.log("asdads");
-
-
-	});
-});
-*/
 
